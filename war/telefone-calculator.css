@@ -1,0 +1,63 @@
+@CHARSET "ISO-8859-1";
+
+.preto {
+	color: #000000;
+	font-family:Arial;
+	font-size:14px
+}
+
+.vermelho {
+	color: #FF0000;
+	font-family:Arial;
+	font-size:14px
+}
+
+.vermelho-total {
+	color: #FF0000;
+	font-weight:bold;
+	font-family:Arial;
+    font-size:14px
+}
+
+.cinza {
+	color: #FFFFFF;
+}
+
+.titulo-tabela {
+    background-color:#CCCCCC;
+    font-family:Arial;
+    font-size:14px
+}
+
+.branco {
+	color: #EEEEEE;
+}
+
+.laranja {
+	color: #C35617;
+	font-weight:bold;
+	font-family:Arial;
+	font-size:14px
+}
+
+.wrapper-ligacoes {
+    border:1px solid #000000;
+    width:80%;
+}
+
+.wrapper-resto {
+    width:80%;
+}
+
+.compartilhados {
+    border:1px solid #000000;
+    width:50%;
+    float:left;
+}
+
+.sumario {
+	border:1px solid #000000;
+	width:40%;
+	float:right;
+}
+

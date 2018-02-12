@@ -1,0 +1,30 @@
+<!-- Indices written at Wed, 8 Jul 2009 18:52:58 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 17 times in query history -->
+    <datastore-index kind="donos" ancestor="false" source="auto">
+        <property name="doador" direction="asc"/>
+        <property name="nome_exibicao" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 8 times in query history -->
+    <datastore-index kind="ligacoes" ancestor="false" source="auto">
+        <property name="id_conta" direction="asc"/>
+        <property name="data" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 368 times in query history -->
+    <datastore-index kind="ligacoes" ancestor="false" source="auto">
+        <property name="cidade_area" direction="asc"/>
+        <property name="telefone" direction="asc"/>
+        <property name="data" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="contas" ancestor="false" source="auto">
+        <property name="mes" direction="desc"/>
+        <property name="ano" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Controllers -->
+    <bean name="/app/index.htm" class="com.appspot.dmutti.calculator.controller.IndexController">
+        <property name="contaBO" ref="ContaBO"/>
+        <property name="donoBO" ref="DonoBO"/>
+    </bean>
+    
+    <bean name="/app/upload.htm" class="com.appspot.dmutti.calculator.controller.UploadController">
+        <property name="contaBO" ref="ContaBO"/>
+        <property name="commandClass" value="com.appspot.dmutti.calculator.command.FileUploadCommand"/>
+    </bean>
+                
+    <bean name="/app/display.htm" class="com.appspot.dmutti.calculator.controller.DisplayController">
+        <property name="contaBO" ref="ContaBO"/>
+        <property name="donoBO" ref="DonoBO"/>
+    </bean>
+              
+    <bean name="/app/save.htm" class="com.appspot.dmutti.calculator.controller.SaveController">
+        <property name="ligacaoBO" ref="LigacaoBO"/>
+        <property name="commandClass" value="com.appspot.dmutti.calculator.command.SaveCommand"/>
+    </bean>                
+
+    <!-- BOs -->
+    <bean id="ContaBO" class="com.appspot.dmutti.calculator.bo.ContaBO">
+        <property name="compartilhadoDao" ref="CompartilhadoDAO"/>
+        <property name="contaDao" ref="ContaDAO"/>
+        <property name="donoBO" ref="DonoBO"/>
+        <property name="ligacaoBO"  ref="LigacaoBO"/>
+    </bean>
+    
+    <bean id="DonoBO" class="com.appspot.dmutti.calculator.bo.DonoBO">
+        <property name="donoDao" ref="DonoDAO"/>
+    </bean>
+    
+    <bean id="LigacaoBO" class="com.appspot.dmutti.calculator.bo.LigacaoBO">
+        <property name="donoBO" ref="DonoBO"/>
+        <property name="ligacaoDao" ref="LigacaoDAO"/>
+    </bean>
+
+    <!-- DAOs -->
+    <bean id="CompartilhadoDAO" class="com.appspot.dmutti.calculator.dao.CompartilhadoDAO">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+    <bean id="ContaDAO" class="com.appspot.dmutti.calculator.dao.ContaDAO">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+    <bean id="DonoDAO" class="com.appspot.dmutti.calculator.dao.DonoDAO">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+    <bean id="LigacaoDAO" class="com.appspot.dmutti.calculator.dao.LigacaoDAO">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+
+    <!-- Transacoes -->
+    <bean id="entityManager" factory-bean="EMF" factory-method="entityManager"/>
+
+    <bean id="EMF" class="com.appspot.dmutti.calculator.support.EMF">
+        <property name="entityManagerFactory">
+            <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+                <property name="persistenceUnitName" value="transactions-optional"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- MVC -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+	<bean id="multipartResolver" class="com.appspot.dmutti.calculator.support.StreamingMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="100000" />
+	</bean>
+</beans>
